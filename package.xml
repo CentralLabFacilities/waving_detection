@@ -1,0 +1,26 @@
+<package>
+  <name>wave_detection</name>
+  <description>
+     Hand waving detection for tobi
+  </description>
+  <author>lziegler, prenner, pdressel</author>
+  <maintainer email="lziegler@techfak.uni-bielefeld.de">Leon Ziegler</maintainer>
+  <license>BSD</license>
+  <version>1.0.0</version>
+  
+  <build_depend>roscpp</build_depend>
+  <build_depend>openni_camera</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+</package>
+
+
