@@ -32,6 +32,6 @@ install(TARGETS wave_tracker
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(FILES wave_tracker.launch
+install(FILES launch/wave_tracker.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
