@@ -6,9 +6,9 @@
 
 #include <iostream>
 
-#include "wave_detection/HandCreate.h"
-#include "wave_detection/HandDestroy.h"
-#include "wave_detection/HandUpdate.h"
+#include "waving_detection/HandCreate.h"
+#include "waving_detection/HandDestroy.h"
+#include "waving_detection/HandUpdate.h"
 
 #define CHECK_RC(nRetVal, what)\
 	if (nRetVal != XN_STATUS_OK) {\
@@ -59,7 +59,7 @@ void XN_CALLBACK_TYPE Hand_Create(
         XnFloat time,
         void *pCookie) {
     std::cout << "waving detected" << std::endl;
-    wave_detection::HandCreate message;
+    waving_detection::HandCreate message;
     message.header.stamp = ros::Time::now();
     message.id = userID;
     message.point.x = xnPos->X;
@@ -74,7 +74,7 @@ void XN_CALLBACK_TYPE Hand_Update(
         const XnPoint3D *xnPos,
         XnFloat time,
         void *pCookie) {
-    wave_detection::HandUpdate message;
+    waving_detection::HandUpdate message;
     message.header.stamp = ros::Time::now();
     message.id = userID;
     message.point.x = xnPos->X;
@@ -93,7 +93,7 @@ void XN_CALLBACK_TYPE Hand_Destroy(
    // g_GestureGenerator.AddGesture(GESTURE_RAISE, b_XnBoundingBox3D);
    // g_GestureGenerator.AddGesture(GESTURE_MOVE, b_XnBoundingBox3D);
     
-    wave_detection::HandDestroy message;
+    waving_detection::HandDestroy message;
     message.header.stamp = ros::Time::now();
     message.id = userID;
     pubHandDestroy.publish(message);
@@ -133,9 +133,9 @@ int main(int argc, char **argv) {
   // rc = g_GestureGenerator.AddGesture(GESTURE_MOVE, b_XnBoundingBox3D);
 
     // Create publisher
-    pubHandCreate = node.advertise<wave_detection::HandCreate>("HandCreate", 1000);
-    pubHandUpdate = node.advertise<wave_detection::HandUpdate>("HandUpdate", 1000);
-    pubHandDestroy = node.advertise<wave_detection::HandDestroy>("HandDestroy", 1000);
+    pubHandCreate = node.advertise<waving_detection::HandCreate>("HandCreate", 1000);
+    pubHandUpdate = node.advertise<waving_detection::HandUpdate>("HandUpdate", 1000);
+    pubHandDestroy = node.advertise<waving_detection::HandDestroy>("HandDestroy", 1000);
     
     // async spinner for gesture detection and parallel service advertising
     ros::AsyncSpinner spinner(2); // Use 2 threads
