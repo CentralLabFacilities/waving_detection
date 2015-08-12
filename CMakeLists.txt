@@ -28,7 +28,7 @@ MESSAGE(STATUS "  openni lib: ${OPENNI_LIBRARIES} -- dir: ${OPENNI_LIBRARY_DIRS}
 include_directories(${OPENNI_INCLUDE_DIRS})
 link_directories(${OPENNI_LIBRARY_DIRS})
 
-add_executable(waving_detection src/wave_tracker.cpp)
+add_executable(waving_detection src/waving_detection.cpp)
 target_link_libraries(waving_detection ${OPENNI_LIBRARIES} ${catkin_LIBRARIES})
 
 install(TARGETS waving_detection
@@ -37,6 +37,9 @@ install(TARGETS waving_detection
    RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(FILES launch/waving_detection.launch
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+install(DIRECTORY launch
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+
+install(DIRECTORY config
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+    

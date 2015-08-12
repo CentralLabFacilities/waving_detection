@@ -43,7 +43,6 @@ void XN_CALLBACK_TYPE GestureRecognizedHandler(
         const XnPoint3D *pPosition,
         const XnPoint3D *pEndPosition,
         void *pCookie) {
-	//printf("Gesture recognized: %s\n", strGesture);
     // disable wave detection
     g_GestureGenerator.RemoveGesture(strGesture);
     // start tracking
@@ -88,10 +87,9 @@ void XN_CALLBACK_TYPE Hand_Destroy(
         XnUserID userID,
         XnFloat time,
         void *pCookie) {
+
     // enable wave detection
     g_GestureGenerator.AddGesture(GESTURE_WAVE, b_XnBoundingBox3D);
-   // g_GestureGenerator.AddGesture(GESTURE_RAISE, b_XnBoundingBox3D);
-   // g_GestureGenerator.AddGesture(GESTURE_MOVE, b_XnBoundingBox3D);
     
     waving_detection::HandDestroy message;
     message.header.stamp = ros::Time::now();
@@ -100,11 +98,11 @@ void XN_CALLBACK_TYPE Hand_Destroy(
 }
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "wave_detection");
+    ros::init(argc, argv, "waving_detection");
     ros::NodeHandle node;
 
     // Read config xml
-    std::string configFilename = ros::package::getPath("wave_detection") + "/gesture_wave_tracker.xml";
+    std::string configFilename = ros::package::getPath("waving_detection") + "/config/gesture_waving_detection.xml";
 
     // Initialize context object
     xn::ScriptNode scriptNode;
@@ -129,8 +127,6 @@ int main(int argc, char **argv) {
 
     // more gestures: Click, RaiseHand ?
     rc = g_GestureGenerator.AddGesture(GESTURE_WAVE, b_XnBoundingBox3D);
-   // rc = g_GestureGenerator.AddGesture(GESTURE_RAISE, b_XnBoundingBox3D);
-  // rc = g_GestureGenerator.AddGesture(GESTURE_MOVE, b_XnBoundingBox3D);
 
     // Create publisher
     pubHandCreate = node.advertise<waving_detection::HandCreate>("HandCreate", 1000);
@@ -141,7 +137,7 @@ int main(int argc, char **argv) {
     ros::AsyncSpinner spinner(2); // Use 2 threads
     spinner.start();
 
-    ROS_INFO("ToBI wave detection is running ... ");
+    ROS_INFO("waving detection is running ... ");
 
     while (node.ok()) {
         rc = g_Context.WaitAndUpdateAll();
