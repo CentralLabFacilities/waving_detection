@@ -1,3 +1,3 @@
 <launch>
-  <node name="ToBI_wave_tracker" pkg="wave_detection" type="wave_tracker" respawn="true" output="screen" />
+  <node name="ToBI_waving_detection" pkg="waving_detection" type="waving_detection" respawn="true" output="screen" />
 </launch>
